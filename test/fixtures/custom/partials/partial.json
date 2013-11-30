@@ -1,0 +1,5 @@
+{"items" : [
+  {"name": "main", "link": "index.html"},
+  {"name": "inner", "link": "inner.html"}
+],
+"title": "new title"}

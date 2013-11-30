@@ -1,0 +1,43 @@
+{
+  "name": "grunt-mustache-html",
+  "description": "The best Grunt plugin ever.",
+  "version": "0.1.1",
+  "homepage": "https://github.com/leochung/grunt-mustache-html",
+  "author": {
+    "name": "zhongyu",
+    "email": "yuzhong@sohu-inc.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/haio/grunt-mustache-html.git"
+  },
+  "bugs": {
+    "url": "https://github.com/haio/grunt-mustache-html/issues"
+  },
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "https://github.com/haio/grunt-mustache-html/blob/master/LICENSE-MIT"
+    }
+  ],
+  "main": "Gruntfile.js",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "scripts": {
+    "test": "grunt test"
+  },
+  "devDependencies": {
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-clean": "~0.4.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt": "~0.4.2",
+    "hogan.js": "~2.0.0"
+  },
+  "peerDependencies": {
+    "grunt": "~0.4.2"
+  },
+  "keywords": [
+    "gruntplugin"
+  ]
+}
