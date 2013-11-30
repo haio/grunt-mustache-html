@@ -1,8 +1,8 @@
 {
   "name": "grunt-mustache-html",
   "description": "The best Grunt plugin ever.",
-  "version": "0.1.1",
-  "homepage": "https://github.com/leochung/grunt-mustache-html",
+  "version": "0.1.2",
+  "homepage": "https://github.com/haio/grunt-mustache-html",
   "author": {
     "name": "zhongyu",
     "email": "yuzhong@sohu-inc.com"
