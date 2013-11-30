@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git://github.com/haio/grunt-mustache-html.git"
+    "url": "git@github.com:haio/grunt-mustache-html.git"
   },
   "bugs": {
     "url": "https://github.com/haio/grunt-mustache-html/issues"
