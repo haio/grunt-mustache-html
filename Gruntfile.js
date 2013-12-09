@@ -1,6 +1,6 @@
 /*
  * grunt-mustache-html
- * https://github.com/leochung/grunt-mustache-html
+ * https://github.com/haio/grunt-mustache-html
  *
  * Copyright (c) 2013 zhongyu
  * Licensed under the MIT license.

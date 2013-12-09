@@ -13,7 +13,7 @@ module.exports = function(grunt) {
   // Please see the Grunt documentation for more information regarding task
   // creation: http://gruntjs.com/creating-tasks
 
-  grunt.registerMultiTask('mustache_html', 'The best Grunt plugin ever.', function() {
+  grunt.registerMultiTask('mustache_html', 'Compile mustache|hbs templates to HTML', function() {
     // Merge task-specific and/or target-specific options with these defaults.
     var options = this.options({
       src: 'src',
