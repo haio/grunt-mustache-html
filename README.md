@@ -1,6 +1,6 @@
 # grunt-mustache-html
 
-> The best Grunt plugin ever.
+> Compile mustache or hbs templates.
 
 ## Getting Started
 This plugin requires Grunt `~0.4.2`
@@ -29,6 +29,8 @@ grunt.initConfig({
       src: 'src',
       dist: 'dist',
       type: 'mustache' // mustache Or hbs
+    },
+    dist: {
     }
   }
 });
