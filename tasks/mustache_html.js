@@ -29,46 +29,50 @@ module.exports = function(grunt) {
     // jsts path
     var layoutPath = options.src + '/layout' + jstSuffix,
         pagePath = options.src + '/pages',
-        partialPath = options.src + '/partials',
-        context = {},
-        partials = [];
+        partialPath = options.src + '/partials';
 
-    // retrieve layout
-    var pageLayout = grunt.file.read(layoutPath);
+    var pageData = {},
+        partials = render(partialPath),
+        pages = render(pagePath, partials);
 
-    // retrieve partials
-    grunt.file.recurse(partialPath, function (abspath, rootdir, subdir, filename) {
-        if (!filename.match(matcher) && !filename.match(/\.json/)) return;
+    var layoutSrc = grunt.file.read(layoutPath),
+        layout = hogan.compile(layoutSrc, { sectionTags: [{o:'_i', c:'i'}] });
 
-        var name = filename.replace(matcher, ''),
-            dataPath = abspath.replace(matcher, '.json'),
-            data = {};
-
-        var templateSrc = grunt.file.read(abspath),
-            template = hogan.compile(templateSrc, { sectionTags: [{o:'_i', c:'i'}] });
-
-        if (grunt.file.exists(dataPath)) {
-            data = JSON.parse(grunt.file.read(dataPath));
-        }
-        
-        partials[name] = template.render(data);
-    });
-
-    // retrieve pages
-    grunt.file.recurse(pagePath, function (abspath, rootdir, subdir, filename) {
-        if (!filename.match(matcher)) return;
-
-        var name = filename.replace(matcher, ''),
-            templateSrc = grunt.file.read(abspath),
-            template = hogan.compile(templateSrc, { sectionTags: [{o:'_i', c:'i'}] });
-
-        // render parital in layout
-        partials.content = template.render(context, partials);
-
-        var page = hogan.compile(pageLayout, { sectionTags: [{o:'_i', c:'i'}] });
-        page = page.render(context, partials);
-
+    each(pages, function (page, name) {
+        partials.content = page;
+        page = layout.render(pageData[name] || {}, partials);
         grunt.file.write(options.dist  + '/' + name + '.html', page);
     });
+    
+    function render(path, partials) {
+
+        var pages = {}; 
+        grunt.file.recurse(path, function (abspath, rootdir, subdir, filename) {
+
+            if (!filename.match(matcher)) return;
+
+            var name = filename.replace(matcher, ''),
+                dataPath = abspath.replace(matcher, '.json'),
+                data = {};
+
+            var templateSrc = grunt.file.read(abspath),
+                template = hogan.compile(templateSrc, { sectionTags: [{o:'_i', c:'i'}] });
+
+            if (grunt.file.exists(dataPath)) {
+                data = JSON.parse(grunt.file.read(dataPath));
+                pageData[name] = data;
+            }
+             
+            pages[name] = template.render(data, partials);
+        });
+        return pages;
+    }
+
+    function each(obj, iter) {
+        var keys = Object.keys(obj);
+        for (var i=0,l=keys.length; i<l; i++) {
+            iter.call(null, obj[keys[i]], keys[i]);
+        }
+    }  
   });
 };

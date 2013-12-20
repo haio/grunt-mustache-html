@@ -48,6 +48,7 @@ The source directory of your templates, the directory should be structured like:
 .
 ├── layout.mustache
 ├── pages
+│   └── index.json
 │   └── index.mustache
 └── partials
     ├── nav.json
@@ -55,7 +56,8 @@ The source directory of your templates, the directory should be structured like:
 ```
 
 * `layout.mustache` must exist, and its name should have prefix `layout`
-* `pages` contains the page templates that eventually created
+* `pages` contains the page templates that eventually created, `.json` contains the page specify data
+which can be also rendered in layout page.
 * `partials` contains the partial templates that might be used in the page templates,`.json` contains the json format data, its name must be the save with the partial.
 
 #### options.dist
