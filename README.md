@@ -31,6 +31,14 @@ grunt.initConfig({
       type: 'mustache' // mustache Or hbs
     },
     dist: {
+      globals: {
+        analytics_id: 'UA-123456-1'
+      }
+    },
+    dev: {
+      globals: {
+        development: true
+      }
     }
   }
 });
@@ -66,12 +74,17 @@ Default value: `dist`
 
 The destination directory of the crated HTML files.
 
-#### optionstype.
+#### options.type
 Type: `String`
 Default value: `mustache`
 
 The type of JST, can be `mustache` or `hbs`.
 
+#### globals
+Type: `Object`
+Default value: {}
+
+Contains global data. May be used to define environment-specific variables
 
 ## Test
 Run `grunt test`.

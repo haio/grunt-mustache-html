@@ -20,7 +20,9 @@ module.exports = function(grunt) {
       dist: 'dist',
       type: 'mustache'
     });
-   
+
+    var globals = this.data.globals || {};
+
     var fs = require('fs'),
         hogan = require('hogan.js'),
         jstSuffix = '.' + options.type,
@@ -43,7 +45,7 @@ module.exports = function(grunt) {
         page = layout.render(pageData[name] || {}, partials);
         grunt.file.write(options.dist  + '/' + name + '.html', page);
     });
-    
+
     function render(path, partials) {
 
         var pages = {}; 
@@ -62,8 +64,8 @@ module.exports = function(grunt) {
                 data = JSON.parse(grunt.file.read(dataPath));
                 pageData[name] = data;
             }
-             
-            pages[name] = template.render(data, partials);
+
+            pages[name] = template.render(merge(globals, data), partials);
         });
         return pages;
     }
@@ -73,6 +75,18 @@ module.exports = function(grunt) {
         for (var i=0,l=keys.length; i<l; i++) {
             iter.call(null, obj[keys[i]], keys[i]);
         }
-    }  
+    }
+
+    function merge(init, extended) {
+      var result = {};
+
+      function mergeIter(v, k) { result[k] = v; }
+
+      each(init, mergeIter);
+      each(extended, mergeIter);
+
+      return result;
+    }
+
   });
 };
