@@ -55,17 +55,19 @@ module.exports = function(grunt) {
 
             var name = filename.replace(matcher, ''),
                 dataPath = abspath.replace(matcher, '.json'),
-                data = {};
+                locals = merge({}, globals),
+                data   = {};
 
             var templateSrc = grunt.file.read(abspath),
                 template = hogan.compile(templateSrc, { sectionTags: [{o:'_i', c:'i'}] });
 
             if (grunt.file.exists(dataPath)) {
                 data = JSON.parse(grunt.file.read(dataPath));
-                pageData[name] = data;
+                merge(locals, data);
+                pageData[name] = locals;
             }
 
-            pages[name] = template.render(merge(globals, data), partials);
+            pages[name] = template.render(locals, partials);
         });
         return pages;
     }
@@ -78,14 +80,11 @@ module.exports = function(grunt) {
     }
 
     function merge(init, extended) {
-      var result = {};
+      each(extended, function(v, k) {
+        init[k] = v;
+      });
 
-      function mergeIter(v, k) { result[k] = v; }
-
-      each(init, mergeIter);
-      each(extended, mergeIter);
-
-      return result;
+      return init;
     }
 
   });
