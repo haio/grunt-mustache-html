@@ -20,7 +20,9 @@ module.exports = function(grunt) {
       dist: 'dist',
       type: 'mustache'
     });
-   
+
+    var globals = this.data.globals || {};
+
     var fs = require('fs'),
         hogan = require('hogan.js'),
         jstSuffix = '.' + options.type,
@@ -43,7 +45,7 @@ module.exports = function(grunt) {
         page = layout.render(pageData[name] || {}, partials);
         grunt.file.write(options.dist  + '/' + name + '.html', page);
     });
-    
+
     function render(path, partials) {
 
         var pages = {}; 
@@ -53,17 +55,19 @@ module.exports = function(grunt) {
 
             var name = filename.replace(matcher, ''),
                 dataPath = abspath.replace(matcher, '.json'),
-                data = {};
+                locals = merge({}, globals),
+                data   = {};
 
             var templateSrc = grunt.file.read(abspath),
                 template = hogan.compile(templateSrc, { sectionTags: [{o:'_i', c:'i'}] });
 
             if (grunt.file.exists(dataPath)) {
                 data = JSON.parse(grunt.file.read(dataPath));
-                pageData[name] = data;
+                merge(locals, data);
+                pageData[name] = locals;
             }
-             
-            pages[name] = template.render(data, partials);
+
+            pages[name] = template.render(locals, partials);
         });
         return pages;
     }
@@ -73,6 +77,15 @@ module.exports = function(grunt) {
         for (var i=0,l=keys.length; i<l; i++) {
             iter.call(null, obj[keys[i]], keys[i]);
         }
-    }  
+    }
+
+    function merge(init, extended) {
+      each(extended, function(v, k) {
+        init[k] = v;
+      });
+
+      return init;
+    }
+
   });
 };

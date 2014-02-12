@@ -40,6 +40,9 @@ module.exports = function(grunt) {
             src: 'test/fixtures/custom',
             dist: 'tmp',
             type: 'hbs'
+        },
+        globals: {
+          dev: 'this is global'
         }
       },
     },
