@@ -30,15 +30,8 @@ grunt.initConfig({
       dist: 'dist',
       type: 'mustache' // mustache Or hbs
     },
-    dist: {
-      globals: {
-        analytics_id: 'UA-123456-1'
-      }
-    },
-    dev: {
-      globals: {
-        development: true
-      }
+    globals: {
+      analytics_id: 'UA-123456-1'
     }
   }
 });
