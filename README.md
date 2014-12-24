@@ -25,17 +25,21 @@ Generate static HTML file from mustache|hbs JST for static HTML docs.
 ```js
 grunt.initConfig({
   mustache_html: {
-    options: {
-      src: 'src',
-      dist: 'dist',
-      type: 'mustache' // mustache Or hbs
-    },
-    globals: {
-      analytics_id: 'UA-123456-1'
+    development: {
+      options: {
+        src: 'src',
+        dist: 'dist',
+        type: 'mustache' // mustache Or hbs
+      },
+      globals: {
+        analytics_id: 'UA-123456-1'
+      }
     }
   }
 });
 ```
+
+Now the subtask `mustache_html:development` is available.
 
 ### options
 
