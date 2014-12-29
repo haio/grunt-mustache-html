@@ -62,7 +62,16 @@ module.exports = function(grunt) {
                 template = hogan.compile(templateSrc, { sectionTags: [{o:'_i', c:'i'}] });
 
             if (grunt.file.exists(dataPath)) {
-                data = JSON.parse(grunt.file.read(dataPath));
+                data = JSON.parse(grunt.file.read(dataPath), function (key, value) {
+                    if (value && (typeof value === 'string') && value.indexOf('function') === 0) {
+                      try {
+                        return new Function('return ' + value)();
+                      } catch (ex) {
+                        //faulty function, just return it as a raw value
+                      }
+                    }
+                    return value;
+                });
                 merge(locals, data);
                 pageData[name] = locals;
             }
