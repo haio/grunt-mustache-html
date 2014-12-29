@@ -1,11 +1,11 @@
 {
   "name": "grunt-mustache-html",
   "description": "The best Grunt plugin ever.",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "homepage": "https://github.com/haio/grunt-mustache-html",
   "author": {
-    "name": "zhongyu",
-    "email": "yuzhong@sohu-inc.com"
+    "name": "haio",
+    "email": "mockingror@gmail.com"
   },
   "repository": {
     "type": "git",
