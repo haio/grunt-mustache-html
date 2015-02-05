@@ -1,7 +1,7 @@
 {
   "name": "grunt-mustache-html",
   "description": "The best Grunt plugin ever.",
-  "version": "0.1.8",
+  "version": "0.1.9",
   "homepage": "https://github.com/haio/grunt-mustache-html",
   "author": {
     "name": "haio",
