@@ -61,15 +61,15 @@ The source directory of your templates, the directory should be structured like:
 ```
 
 * `layout.mustache` must exist, and its name should have prefix `layout`
-* `pages` contains the page templates that eventually created, `.json` contains the page specify data
-which can be also rendered in layout page.
-* `partials` contains the partial templates that might be used in the page templates,`.json` contains the json format data, its name must be the save with the partial.
+* `pages` contains the page templates that are eventually created, `.json` contains the page specify data
+which can be also rendered in layout page. Use `{{>content}}` in `layout.mustache` to paste the page's content in.
+* `partials` contains the partial templates that might be used in the page templates, `.json` contains the json formatted data, its name must be the save as the partial's.
 
 #### options.dist
 Type: `String`
 Default value: `dist`
 
-The destination directory of the crated HTML files.
+The destination directory of the created HTML files.
 
 #### options.type
 Type: `String`
